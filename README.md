@@ -4,3 +4,7 @@
 3. Download ffmpeg following this [guide](http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/)
 4. Open command prompt and navigate to the repo directory
 5. Run the command below
+```
+pip3 install -r requirements.txt
+python gui.py
+```
