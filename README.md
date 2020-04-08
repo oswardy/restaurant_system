@@ -5,5 +5,5 @@
 4. Run the command below
 ```
 pip3 install -r requirements.txt
-python gui.py
+python python.py
 ```
