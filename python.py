@@ -49,35 +49,6 @@ def read_sales(data_file):
         print("                       -----------")
 
 
-def receipt(data_file):
-    # Read data
-    with open(data_file, 'r') as f:
-        reader = csv.DictReader(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        burger = 0
-        fries = 0
-        lamb = 0
-        nachos = 0
-        tigers = 0
-        pizza = 0
-        for row in reader:
-            burger += int(row['Burger'])
-            fries += int(row['Fries'])
-            lamb += int(row['Lamb'])
-            nachos += int(row['Nachos'])
-            tigers += int(row['Tigers'])
-            pizza += int(row['Pizza'])
-            print("========================\n  Transaction Id: " + row['Transaction Id'] + "\n========================")
-            print("Quantity of Burger: " + str(burger))
-            print("Quantity of Fries: " + str(fries))
-            print("Quantity of Lamb: " + str(lamb))
-            print("Quantity of Nachos: " + str(nachos))
-            print("Quantity of Tigers: " + str(tigers))
-            print("Quantity of Pizza: " + str(pizza))
-
-
-
-#   ok
-
 doublec_burger = 16.00
 french_fries = 5.00
 lamb_chop = 19.00
@@ -140,27 +111,27 @@ def printmenu():
             print("| You have ordered " + str(qty_burger) + " double cheese burger!")
             print("| Total:", total)
         elif Item == "B" or Item == "b":
-            qty_french_fries += inputNumber("| How many would you like?Quantity: ")
+            qty_french_fries += inputNumber("| How many would you like? Quantity: ")
             total = total + (french_fries * float(qty_french_fries))
             print("| You have ordered " + str(qty_french_fries) + " french fries!")
             print("| Total:", total)
         elif Item == "C" or Item == "c":
-            qty_lamb_chop += inputNumber("| How many would you like?Quantity: ")
+            qty_lamb_chop += inputNumber("| How many would you like? Quantity: ")
             total = total + (lamb_chop * float(qty_lamb_chop))
             print("| You have ordered " + str(qty_lamb_chop) + " set of lamb chop!")
             print("| Total:", total)
         elif Item == "D" or Item == "d":
-            qty_cheesy_nachos += inputNumber("| How many would you like?Quantity: ")
+            qty_cheesy_nachos += inputNumber("| How many would you like? Quantity: ")
             total = total + (cheesy_nachos * float(qty_cheesy_nachos))
             print("| You have ordered " + str(qty_cheesy_nachos) + " cheesy nachos!")
             print("| Total:", total)
         elif Item == "E" or Item == "e":
-            qty_tiger_beer = inputNumber("| How many would you like?Quantity: ")
+            qty_tiger_beer = inputNumber("| How many would you like? Quantity: ")
             total = total + (tiger_beer * float(qty_tiger_beer))
             print("| You have ordered " + str(qty_tiger_beer) + " buckets of tiger beer!")
             print("| Total:", total)
         elif Item == "F" or Item == "f":
-            qty_beef_pizza += inputNumber("| How many would you like?Quantity: ")
+            qty_beef_pizza += inputNumber("| How many would you like? Quantity: ")
             total = total + (beef_pizza * float(qty_beef_pizza))
             print("| You have ordered " + str(qty_beef_pizza) + " beef bacon pizza!")
             print("| Total:", total)
@@ -201,12 +172,6 @@ def generatereceipt(data_file):
   num = inputNumber("Please enter the transation no: ")
   with open(data_file, 'r') as f:
         reader  = csv.DictReader(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        burger = 10
-        fries = 0
-        lamb = 0
-        nachos = 0
-        tigers = 0
-        pizza = 0
         for i, row in enumerate(reader,1) :
           if num == i:
             print("Receipt of transaction No "+ str(i)+ " have been created") 
@@ -216,18 +181,22 @@ def generatereceipt(data_file):
             pdf.set_font('Times', 'B', 12)
             pdf.cell(0, 10, 'Transaction number: ' + str(num), 0, 1)
             pdf.set_font('Times', '', 12)
-            pdf.cell(0, 10, 'Burgers sold today: ' + str(row['Burger']), 0, 0)
-            pdf.cell(-50, 10, 'Total sales: RM' + str(int(row['Burger'])*doublec_burger),0, 1, 'C')
+            pdf.cell(0, 10, 'Burgers : ' + str(row['Burger']), 0, 0)
+            pdf.cell(-50, 10, 'Total ordered: RM' + str(int(row['Burger'])*doublec_burger),0, 1, 'C')
             pdf.cell(0, 10, 'Fries : ' + str(row['Fries']), 0, 0)
-            pdf.cell(-50, 10, 'Total sales: RM' + str(int(row['Fries'])*french_fries),0, 1, 'C')
+            pdf.cell(-50, 10, 'Total ordered: RM' + str(int(row['Fries'])*french_fries),0, 1, 'C')
             pdf.cell(0, 10, 'Lambs : ' + str(row['Lamb']), 0, 0)
-            pdf.cell(-50, 10, 'Total sales: RM' + str(int(row['Lamb'])*lamb_chop),0, 1, 'C')
+            pdf.cell(-50, 10, 'Total ordered: RM' + str(int(row['Lamb'])*lamb_chop),0, 1, 'C')
             pdf.cell(0, 10, 'Nachos : ' + str(row['Nachos']), 0, 0)
-            pdf.cell(-50, 10, 'Total sales: RM' + str(int(row['Nachos'])*cheesy_nachos),0, 1, 'C')
+            pdf.cell(-50, 10, 'Total ordered: RM' + str(int(row['Nachos'])*cheesy_nachos),0, 1, 'C')
             pdf.cell(0, 10, 'Bucket Tigers beers : ' + str(row['Tigers']), 0, 0)
-            pdf.cell(-50, 10, 'Total sales: RM' + str(int(row['Tigers'])*tiger_beer),0, 1, 'C')
+            pdf.cell(-50, 10, 'Total ordered: RM' + str(int(row['Tigers'])*tiger_beer),0, 1, 'C')
             pdf.cell(0, 10, 'Beef Pizza : ' + str(row['Pizza']), 0, 0)
-            pdf.cell(-50, 10, 'Total sales: RM' + str(int(row['Pizza'])*beef_pizza),0, 1, 'C')
+            pdf.cell(-50, 10, 'Total ordered: RM' + str(int(row['Pizza'])*beef_pizza),0, 1, 'C')
+            pdf.set_font('Times', 'B', 12)
+            pdf.cell(0, 10, "", 0, 1, 'C')
+            pdf.cell(0, 10, 'Total Amount: RM' + str((int(row['Pizza'])*beef_pizza)+(int(row['Fries'])*french_fries)+(int(row['Lamb'])*lamb_chop)+(int(row['Nachos'])*cheesy_nachos)+(int(row['Tigers'])*tiger_beer)+(int(row['Burger'])*doublec_burger)),0, 1, 'C')
+            #pdf.cell(-50, 10, 'Total Sales: RM' + str((int(row['Pizza'])*beef_pizza)+(int(row['Fries'])*french_fries)+(int(row['Lamb'])*lamb_chop)+(int(row['Nachos'])*cheesy_nachos)+(int(row['Tigers'])*tiger_beer)+(int(row['Burger'])*doublec_burger)),0, 1, 'C')
             pdf.output('sales.pdf', 'F')
             break
 
@@ -243,7 +212,7 @@ def main():
     setup_data_file()
     repeat = True
     while (repeat):
-        filename_obj.flush()
+        filename_obj.flush()    
         user_input = inputNumber("1. Order\n2. Food sales\n3. Generate Receipt\n4. Exit\nNumber:")
         if user_input == 1:
             printmenu()
@@ -251,8 +220,10 @@ def main():
             read_sales(filename)
         elif user_input == 3:
             generatereceipt(filename)
+        elif user_input == 4:
+             repeat = False;   
         else:
-            repeat = False
+            print("Invalid! Please enter again")
     filename_obj.close()
 
 
